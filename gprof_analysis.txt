@@ -1,0 +1,258 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 99.85     27.35    27.35     5538     4.94     4.94  DMXVNCServer::TakePicture(unsigned char*)
+  0.15     27.39     0.04                             DMXVNCServer::Run(int, char**, int, char const*, int, int, bool, bool)
+  0.00     27.39     0.00     7009     0.00     0.00  DMXDisplay::IsOpen()
+  0.00     27.39     0.00     5540     0.00     0.00  DMXDisplay::GetInfo(DISPMANX_MODEINFO_T&)
+  0.00     27.39     0.00     5538     0.00     0.00  DMXDisplay::Snapshot(DMXResource&, DISPMANX_TRANSFORM_T)
+  0.00     27.39     0.00     5538     0.00     0.00  DMXResource::GetResourceHandle()
+  0.00     27.39     0.00     5538     0.00     0.00  DMXResource::ReadData(tag_VC_RECT_T&, void*, int)
+  0.00     27.39     0.00      515     0.00     0.00  UFile::WriteEvent(unsigned short, unsigned short, int)
+  0.00     27.39     0.00      332     0.00     0.00  DMXVNCServer::keysym2scancode(unsigned int)
+  0.00     27.39     0.00       61     0.00     0.00  DMXVNCServer::DoPtr(int, int, int, _rfbClientRec*)
+  0.00     27.39     0.00        5     0.00     0.00  std::vector<char, std::allocator<char> >::_M_default_append(unsigned int)
+  0.00     27.39     0.00        2     0.00     0.00  DMXDisplay::Open(int)
+  0.00     27.39     0.00        2     0.00     0.00  DMXDisplay::Close()
+  0.00     27.39     0.00        2     0.00     0.00  DMXResource::Close()
+  0.00     27.39     0.00        2     0.00     0.00  DMXResource::Create(VC_IMAGE_TYPE_T, int, int, unsigned int*)
+  0.00     27.39     0.00        2     0.00     0.00  DMXVNCServer::Open()
+  0.00     27.39     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z11sig_handleri
+  0.00     27.39     0.00        1     0.00     0.00  _GLOBAL__sub_I_terminate
+  0.00     27.39     0.00        1     0.00     0.00  DMXDisplay::~DMXDisplay()
+  0.00     27.39     0.00        1     0.00     0.00  DMXResource::~DMXResource()
+  0.00     27.39     0.00        1     0.00     0.00  UFile::Open(int, int, int)
+  0.00     27.39     0.00        1     0.00     0.00  UFile::~UFile()
+  0.00     27.39     0.00        1     0.00     0.00  std::string __gnu_cxx::__to_xstring<std::string, char>(int (*)(char*, unsigned int, char const*, std::__va_list), unsigned int, char const*, ...)
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+ 
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this 
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012-2014 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 4 byte(s) for 0.04% of 27.39 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]    100.0    0.04   27.35                 DMXVNCServer::Run(int, char**, int, char const*, int, int, bool, bool) [1]
+               27.35    0.00    5538/5538        DMXVNCServer::TakePicture(unsigned char*) [2]
+                0.00    0.00    7009/7009        DMXDisplay::IsOpen() [11]
+                0.00    0.00       2/2           DMXVNCServer::Open() [24]
+                0.00    0.00       1/1           UFile::Open(int, int, int) [29]
+                0.00    0.00       1/2           DMXResource::Close() [22]
+                0.00    0.00       1/2           DMXDisplay::Close() [21]
+                0.00    0.00       1/1           std::string __gnu_cxx::__to_xstring<std::string, char>(int (*)(char*, unsigned int, char const*, std::__va_list), unsigned int, char const*, ...) [31]
+                0.00    0.00       1/5           std::vector<char, std::allocator<char> >::_M_default_append(unsigned int) [19]
+-----------------------------------------------
+               27.35    0.00    5538/5538        DMXVNCServer::Run(int, char**, int, char const*, int, int, bool, bool) [1]
+[2]     99.9   27.35    0.00    5538         DMXVNCServer::TakePicture(unsigned char*) [2]
+                0.00    0.00    5538/5540        DMXDisplay::GetInfo(DISPMANX_MODEINFO_T&) [12]
+                0.00    0.00    5538/5538        DMXDisplay::Snapshot(DMXResource&, DISPMANX_TRANSFORM_T) [13]
+                0.00    0.00    5538/5538        DMXResource::ReadData(tag_VC_RECT_T&, void*, int) [15]
+-----------------------------------------------
+                0.00    0.00    7009/7009        DMXVNCServer::Run(int, char**, int, char const*, int, int, bool, bool) [1]
+[11]     0.0    0.00    0.00    7009         DMXDisplay::IsOpen() [11]
+-----------------------------------------------
+                0.00    0.00       2/5540        DMXVNCServer::Open() [24]
+                0.00    0.00    5538/5540        DMXVNCServer::TakePicture(unsigned char*) [2]
+[12]     0.0    0.00    0.00    5540         DMXDisplay::GetInfo(DISPMANX_MODEINFO_T&) [12]
+-----------------------------------------------
+                0.00    0.00    5538/5538        DMXVNCServer::TakePicture(unsigned char*) [2]
+[13]     0.0    0.00    0.00    5538         DMXDisplay::Snapshot(DMXResource&, DISPMANX_TRANSFORM_T) [13]
+                0.00    0.00    5538/5538        DMXResource::GetResourceHandle() [14]
+-----------------------------------------------
+                0.00    0.00    5538/5538        DMXDisplay::Snapshot(DMXResource&, DISPMANX_TRANSFORM_T) [13]
+[14]     0.0    0.00    0.00    5538         DMXResource::GetResourceHandle() [14]
+-----------------------------------------------
+                0.00    0.00    5538/5538        DMXVNCServer::TakePicture(unsigned char*) [2]
+[15]     0.0    0.00    0.00    5538         DMXResource::ReadData(tag_VC_RECT_T&, void*, int) [15]
+-----------------------------------------------
+                0.00    0.00     183/515         DMXVNCServer::DoPtr(int, int, int, _rfbClientRec*) [18]
+                0.00    0.00     332/515         DMXVNCServer::dokey(signed char, unsigned int, _rfbClientRec*) [39]
+[16]     0.0    0.00    0.00     515         UFile::WriteEvent(unsigned short, unsigned short, int) [16]
+-----------------------------------------------
+                0.00    0.00     332/332         DMXVNCServer::dokey(signed char, unsigned int, _rfbClientRec*) [39]
+[17]     0.0    0.00    0.00     332         DMXVNCServer::keysym2scancode(unsigned int) [17]
+-----------------------------------------------
+                0.00    0.00      61/61          DMXVNCServer::doptr(int, int, int, _rfbClientRec*) [40]
+[18]     0.0    0.00    0.00      61         DMXVNCServer::DoPtr(int, int, int, _rfbClientRec*) [18]
+                0.00    0.00     183/515         UFile::WriteEvent(unsigned short, unsigned short, int) [16]
+-----------------------------------------------
+                0.00    0.00       1/5           DMXVNCServer::Run(int, char**, int, char const*, int, int, bool, bool) [1]
+                0.00    0.00       4/5           DMXVNCServer::Open() [24]
+[19]     0.0    0.00    0.00       5         std::vector<char, std::allocator<char> >::_M_default_append(unsigned int) [19]
+-----------------------------------------------
+                0.00    0.00       2/2           DMXVNCServer::Open() [24]
+[20]     0.0    0.00    0.00       2         DMXDisplay::Open(int) [20]
+-----------------------------------------------
+                0.00    0.00       1/2           DMXVNCServer::Run(int, char**, int, char const*, int, int, bool, bool) [1]
+                0.00    0.00       1/2           DMXVNCServer::~DMXVNCServer() [45]
+[21]     0.0    0.00    0.00       2         DMXDisplay::Close() [21]
+-----------------------------------------------
+                0.00    0.00       1/2           DMXVNCServer::Run(int, char**, int, char const*, int, int, bool, bool) [1]
+                0.00    0.00       1/2           DMXVNCServer::~DMXVNCServer() [45]
+[22]     0.0    0.00    0.00       2         DMXResource::Close() [22]
+-----------------------------------------------
+                0.00    0.00       2/2           DMXVNCServer::Open() [24]
+[23]     0.0    0.00    0.00       2         DMXResource::Create(VC_IMAGE_TYPE_T, int, int, unsigned int*) [23]
+-----------------------------------------------
+                0.00    0.00       2/2           DMXVNCServer::Run(int, char**, int, char const*, int, int, bool, bool) [1]
+[24]     0.0    0.00    0.00       2         DMXVNCServer::Open() [24]
+                0.00    0.00       4/5           std::vector<char, std::allocator<char> >::_M_default_append(unsigned int) [19]
+                0.00    0.00       2/2           DMXDisplay::Open(int) [20]
+                0.00    0.00       2/5540        DMXDisplay::GetInfo(DISPMANX_MODEINFO_T&) [12]
+                0.00    0.00       2/2           DMXResource::Create(VC_IMAGE_TYPE_T, int, int, unsigned int*) [23]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [56]
+[25]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z11sig_handleri [25]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [56]
+[26]     0.0    0.00    0.00       1         _GLOBAL__sub_I_terminate [26]
+-----------------------------------------------
+                0.00    0.00       1/1           DMXVNCServer::~DMXVNCServer() [45]
+[27]     0.0    0.00    0.00       1         DMXDisplay::~DMXDisplay() [27]
+-----------------------------------------------
+                0.00    0.00       1/1           DMXVNCServer::~DMXVNCServer() [45]
+[28]     0.0    0.00    0.00       1         DMXResource::~DMXResource() [28]
+-----------------------------------------------
+                0.00    0.00       1/1           DMXVNCServer::Run(int, char**, int, char const*, int, int, bool, bool) [1]
+[29]     0.0    0.00    0.00       1         UFile::Open(int, int, int) [29]
+-----------------------------------------------
+                0.00    0.00       1/1           DMXVNCServer::~DMXVNCServer() [45]
+[30]     0.0    0.00    0.00       1         UFile::~UFile() [30]
+-----------------------------------------------
+                0.00    0.00       1/1           DMXVNCServer::Run(int, char**, int, char const*, int, int, bool, bool) [1]
+[31]     0.0    0.00    0.00       1         std::string __gnu_cxx::__to_xstring<std::string, char>(int (*)(char*, unsigned int, char const*, std::__va_list), unsigned int, char const*, ...) [31]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012-2014 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+  [25] _GLOBAL__sub_I__Z11sig_handleri (main.cpp) [14] DMXResource::GetResourceHandle() [24] DMXVNCServer::Open()
+  [26] _GLOBAL__sub_I_terminate (DMXVNCServer.cpp) [22] DMXResource::Close() [18] DMXVNCServer::DoPtr(int, int, int, _rfbClientRec*)
+  [20] DMXDisplay::Open(int)  [23] DMXResource::Create(VC_IMAGE_TYPE_T, int, int, unsigned int*) [16] UFile::WriteEvent(unsigned short, unsigned short, int)
+  [21] DMXDisplay::Close()    [15] DMXResource::ReadData(tag_VC_RECT_T&, void*, int) [29] UFile::Open(int, int, int)
+  [11] DMXDisplay::IsOpen()   [28] DMXResource::~DMXResource() [30] UFile::~UFile()
+  [12] DMXDisplay::GetInfo(DISPMANX_MODEINFO_T&) [2] DMXVNCServer::TakePicture(unsigned char*) [31] std::string __gnu_cxx::__to_xstring<std::string, char>(int (*)(char*, unsigned int, char const*, std::__va_list), unsigned int, char const*, ...)
+  [13] DMXDisplay::Snapshot(DMXResource&, DISPMANX_TRANSFORM_T) [17] DMXVNCServer::keysym2scancode(unsigned int) [19] std::vector<char, std::allocator<char> >::_M_default_append(unsigned int)
+  [27] DMXDisplay::~DMXDisplay() [1] DMXVNCServer::Run(int, char**, int, char const*, int, int, bool, bool)

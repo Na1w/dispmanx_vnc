@@ -19,8 +19,8 @@
 #include "DMXVNCServer.hh"
 #define BPP      2
 
-/* 15 frames per second (if we can) */
-#define PICTURE_TIMEOUT (1.0/15.0)
+/* 30 frames per second (if we can) */
+#define PICTURE_TIMEOUT (1.0/30.0)
 
 extern int terminate;
 

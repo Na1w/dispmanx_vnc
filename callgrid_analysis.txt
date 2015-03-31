@@ -1,0 +1,640 @@
+--------------------------------------------------------------------------------
+Profile data file 'callgrind.out.9424' (creator: callgrind-3.7.0)
+--------------------------------------------------------------------------------
+I1 cache: 
+D1 cache: 
+LL cache: 
+Timerange: Basic block 0 - 159128521
+Trigger: Program termination
+Profiled target:  ./dispmanx_vncserver -f -b (PID 9424, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       99
+Include dirs:     
+User annotated:   
+Auto-annotation:  on
+
+--------------------------------------------------------------------------------
+         Ir 
+--------------------------------------------------------------------------------
+723,402,915  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+         Ir  file:function
+--------------------------------------------------------------------------------
+704,951,925  DMXVNCServer.cpp:vc_dispmanx_resource_read_data
+  3,534,802  /eglibc-2.13/string/../ports/sysdeps/arm/memcpy.S:memcpy [/lib/arm-linux-gnueabihf/ld-2.13.so]
+  1,745,133  /eglibc-2.13/elf/dl-lookup.c:do_lookup_x [/lib/arm-linux-gnueabihf/ld-2.13.so]
+  1,599,274  /eglibc-2.13/string/../ports/sysdeps/arm/memset.S:memset [/lib/arm-linux-gnueabihf/ld-2.13.so]
+  1,061,351  ???:__udivsi3'2 [/lib/arm-linux-gnueabihf/libpthread-2.13.so]
+    796,435  /eglibc-2.13/malloc/malloc.c:malloc [/lib/arm-linux-gnueabihf/libc-2.13.so]
+    636,180  /eglibc-2.13/malloc/malloc.c:free [/lib/arm-linux-gnueabihf/libc-2.13.so]
+    605,044  /eglibc-2.13/malloc/malloc.c:_int_free [/lib/arm-linux-gnueabihf/libc-2.13.so]
+    554,793  /eglibc-2.13/stdio-common/vfprintf.c:vfprintf [/lib/arm-linux-gnueabihf/libc-2.13.so]
+    547,513  /eglibc-2.13/elf/dl-lookup.c:check_match.8400 [/lib/arm-linux-gnueabihf/ld-2.13.so]
+    487,935  /eglibc-2.13/malloc/malloc.c:_int_malloc [/lib/arm-linux-gnueabihf/libc-2.13.so]
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: DMXVNCServer.cpp
+--------------------------------------------------------------------------------
+         Ir 
+
+-- line 12 ----------------------------------------
+          .  # define KEY_SOFT2 KEY_UNKNOWN
+          .  # define KEY_CENTER	KEY_UNKNOWN
+          .  # define KEY_SHARP KEY_UNKNOWN
+          .  # define KEY_STAR KEY_UNKNOWN
+          .  #endif
+          .  
+          .  int terminate = 0;
+          .  
+         38  DMXVNCServer::DMXVNCServer(int BPP, float PICTURE_TIMEOUT) {
+         35  => /eglibc-2.13/gmon/../ports/sysdeps/arm/eabi/arm-mcount.S:__gnu_mcount_nc (1x)
+          1  	this->BPP = BPP;
+          1  	this->PICTURE_TIMEOUT = PICTURE_TIMEOUT;
+          3  }
+          .  
+          5  DMXVNCServer::~DMXVNCServer()
+         35  => /eglibc-2.13/gmon/../ports/sysdeps/arm/eabi/arm-mcount.S:__gnu_mcount_nc (1x)
+          .  {
+          .  	Close();
+          3  	if (server) {
+          2  		rfbShutdownServer(server, TRUE);
+      2,398  => /eglibc-2.13/elf/../ports/sysdeps/arm/dl-trampoline.S:_dl_runtime_resolve (1x)
+     33,987  => ???:rfbShutdownServer (1x)
+          2  		rfbScreenCleanup(server);
+      5,477  => /eglibc-2.13/elf/../ports/sysdeps/arm/dl-trampoline.S:_dl_runtime_resolve (2x)
+     10,635  => ???:rfbScreenCleanup (1x)
+      4,597  => ???:operator delete(void*) (1x)
+          .  		server = nullptr;
+          .  	};
+          4  }
+         71  => /home/pi/dispmanx_vnc/DMXDisplay.cpp:DMXDisplay::~DMXDisplay() (1x)
+         71  => /home/pi/dispmanx_vnc/DMXResource.cpp:DMXResource::~DMXResource() (1x)
+          .  
+          .  void DMXVNCServer::Open()
+         10  {
+         56  => /eglibc-2.13/gmon/../ports/sysdeps/arm/eabi/arm-mcount.S:__gnu_mcount_nc (1x)
+          8  	m_display.Open(screen);
+    723,429  => /home/pi/dispmanx_vnc/DMXDisplay.cpp:DMXDisplay::Open(int) (1x)
+          6  	m_display.GetInfo(info);
+  1,412,452  => /home/pi/dispmanx_vnc/DMXDisplay.cpp:DMXDisplay::GetInfo(DISPMANX_MODEINFO_T&) (2x)
+          .  
+         12  	printf("info: %d, %d, %d, %d\n", info.width, info.height, info.transform, info.input_format);
+    695,884  => /eglibc-2.13/stdio-common/printf.c:printf'2 (1x)
+    713,717  => /eglibc-2.13/stdio-common/printf.c:printf (1x)
+          .  
+          .  	/* DispmanX expects buffer rows to be aligned to a 32 bit boundarys */
+         10  	pitch = ALIGN_UP(2 * info.width, 32);
+          4  	padded_width = pitch / BPP;
+      3,350  => /eglibc-2.13/elf/../ports/sysdeps/arm/dl-trampoline.S:_dl_runtime_resolve (1x)
+    708,173  => /eglibc-2.13/stdio-common/printf.c:printf'2 (1x)
+         18  => ???:__divsi3 (1x)
+          .  
+          .  	printf("Display is %d x %d\n", info.width, info.height);
+          .  
+          6  	imageBuffer1.resize(pitch * info.height);
+          .  	std::fill(imageBuffer1.begin(), imageBuffer1.end(), '\0');
+          .  	imageBuffer2.resize(pitch * info.height);
+          .  	std::fill(imageBuffer2.begin(), imageBuffer2.end(), '\0');
+          .  	image = &imageBuffer1[0];
+          .  	back_image = &imageBuffer2[0];
+          .  
+          .  	r_x0 = r_y0 = 0;
+          .  	r_x1 = info.width;
+          .  	r_y1 = info.height;
+          .  
+          .  	m_resource.Create(type, info.width, info.height, &vc_image_ptr);
+          .  
+          8  	last_x = padded_width / 2;
+          8  	last_y = info.height / 2;
+          4  }
+          .  
+          .  void DMXVNCServer::Close()
+          .  {
+          6  	m_resource.Close();
+     37,294  => /home/pi/dispmanx_vnc/DMXResource.cpp:DMXResource::Close() (1x)
+          4  	m_display.Close();
+716,876,375  => /home/pi/dispmanx_vnc/DMXDisplay.cpp:DMXDisplay::Close() (2x)
+          .  	imageBuffer1.resize(0);
+          .  	imageBuffer2.resize(0);
+          4  	image = nullptr;
+          3  	back_image = nullptr;
+          .  }
+          .  
+          .  bool DMXVNCServer::IsOpen()
+          .  {
+        940  	return m_display.IsOpen();
+     28,021  => /home/pi/dispmanx_vnc/DMXDisplay.cpp:DMXDisplay::IsOpen()'2 (470x)
+          .  }
+          .  
+          .  void DMXVNCServer::Run(int argc, char *argv[], int port, const char *password, int screen, int relativeMode, bool safeMode, bool bandwidthMode)
+         12  {
+         35  => /eglibc-2.13/gmon/../ports/sysdeps/arm/eabi/arm-mcount.S:__gnu_mcount_nc (1x)
+          .  	long usec;
+          .  
+          2  	this->relativeMode = relativeMode;
+          2  	this->safeMode = safeMode;
+          2  	this->bandwidthMode = bandwidthMode;
+          1  	this->screen = screen;
+          .  
+          1  	Open();
+717,941,525  => DMXVNCServer.cpp:DMXVNCServer::Open() (1x)
+          .  
+         11  	server = rfbGetScreen(&argc, argv, padded_width, info.height, 5, 3, BPP);
+      2,401  => /eglibc-2.13/elf/../ports/sysdeps/arm/dl-trampoline.S:_dl_runtime_resolve (1x)
+717,215,620  => ???:rfbGetScreen (1x)
+          2  	if (!server)
+          .  		throw Exception("rfbGetScreen failed");
+          .  
+          1  	if (port){
+          1  		server->port = port;
+          .  	}
+          .  
+          3  	if (*password) {
+          .  		this->password = password;
+          .  		passwords[0] = this->password.c_str();
+          .  		server->authPasswdData = (void *)passwords;
+          .  		server->passwordCheck = rfbCheckPasswordByList;
+          .  	}
+          .  
+          .  	char hostname[HOST_NAME_MAX + 1];
+          5  	if (0 == gethostname(hostname, sizeof(hostname))){
+      3,246  => /eglibc-2.13/elf/../ports/sysdeps/arm/dl-trampoline.S:_dl_runtime_resolve (1x)
+717,183,279  => /eglibc-2.13/misc/../sysdeps/unix/sysv/gethostname.c:gethostname (1x)
+          .  		desktopName = hostname;
+          .  		desktopName += " : ";
+          .  		desktopName += std::to_string(screen);
+          .  		server->desktopName = desktopName.c_str();
+          .  	}
+          .  	else
+          .  		server->desktopName = "VNC server via dispmanx";
+          .  
+          .  	frameBuffer.resize(pitch*info.height);
+          1  	server->frameBuffer = (char*)&frameBuffer[0];
+          2  	server->alwaysShared = (1 == 1);
+          3  	server->kbdAddEvent = dokey;
+          2  	server->ptrAddEvent = doptr;
+          2  	server->newClientHook = newclient;
+          1  	server->screenData = this;
+          .  
+          .  	/*
+          .  	server->serverFormat.redShift = 11;
+          .  	server->serverFormat.blueShift = 0;
+          .  	server->serverFormat.greenShift = 6;
+          .  	*/
+          3  	printf("Server bpp:%d\n", server->serverFormat.bitsPerPixel);
+716,959,365  => /eglibc-2.13/stdio-common/printf.c:printf (1x)
+          4  	printf("Server bigEndian:%d\n", server->serverFormat.bigEndian);
+716,958,319  => /eglibc-2.13/stdio-common/printf.c:printf'2 (1x)
+          4  	printf("Server redShift:%d\n", server->serverFormat.redShift);
+716,957,176  => /eglibc-2.13/stdio-common/printf.c:printf'2 (1x)
+          4  	printf("Server blueShift:%d\n", server->serverFormat.blueShift);
+716,956,072  => /eglibc-2.13/stdio-common/printf.c:printf'2 (1x)
+          4  	printf("Server greeShift:%d\n", server->serverFormat.greenShift);
+716,954,908  => /eglibc-2.13/stdio-common/printf.c:printf'2 (1x)
+          .  
+          .  	/* Initialize the server */
+          2  	rfbInitServer(server);
+      2,602  => /eglibc-2.13/elf/../ports/sysdeps/arm/dl-trampoline.S:_dl_runtime_resolve (1x)
+     80,842  => ???:rfbInitServerWithPthreadsAndZRLE (1x)
+716,870,323  => /home/pi/dispmanx_vnc/UFile.cpp:UFile::Open(int, int, int) (1x)
+          .  
+          .  	m_ufile.Open(this->relativeMode, info.width, info.height);
+          .  
+          .  	/* Loop, processing clients and taking pictures */
+          .  	int errors = 0;
+      7,819  	while (!terminate && rfbIsActive(server)) {
+      2,375  => /eglibc-2.13/elf/../ports/sysdeps/arm/dl-trampoline.S:_dl_runtime_resolve (1x)
+716,842,009  => /home/pi/dispmanx_vnc/DMXDisplay.cpp:DMXDisplay::IsOpen() (1x)
+          5  => ???:rfbIsActive (1x)
+          .  		if (clients && TimeToTakePicture()) {
+          .  			try {
+        940  				if (!IsOpen())
+          .  				{
+          2  					Open();
+715,723,290  => DMXVNCServer.cpp:DMXVNCServer::Open()'2 (1x)
+         10  					if (info.width != server->width || info.height != server->height) {
+          .  						frameBuffer.resize(pitch*info.height);
+        469  						rfbNewFramebuffer(server, &frameBuffer[0], padded_width, info.height, 5, 3, BPP);
+          .  					}
+          .  				}
+          .  
+      2,439  				if (TakePicture((unsigned char *)server->frameBuffer)) {
+715,025,513  => DMXVNCServer.cpp:DMXVNCServer::TakePicture(unsigned char*) (1x)
+      1,905  					rfbMarkRectAsModified(server, r_x0, r_y0, r_x1, r_y1);
+      2,239  => /eglibc-2.13/elf/../ports/sysdeps/arm/dl-trampoline.S:_dl_runtime_resolve (1x)
+713,567,944  => ???:rfbProcessEvents'2 (1x)
+     15,507  => ???:rfbMarkRectAsModified (1x)
+          .  				}
+         89  				errors = 0;
+          .  			}
+          .  			catch (Exception& e) {
+          .  				std::cerr << "Caught exception: " << e.what() << "\n";
+          .  				errors++;
+          .  				if (errors > 10)
+          .  					throw e;
+          .  				Close();
+          .  			}
+          .  		}
+          .  
+        178  		if (!clients)
+          .  		{
+      2,186  			if (IsOpen())
+          .  				Close();
+          .  		}
+          .  
+      2,364  		usec = server->deferUpdateTime * 1000;
+      4,728  		rfbProcessEvents(server, usec);
+      2,376  => /eglibc-2.13/elf/../ports/sysdeps/arm/dl-trampoline.S:_dl_runtime_resolve (1x)
+716,835,254  => ???:rfbProcessEvents (1x)
+          .  	}
+          3  }
+          .  
+          .  /*
+          .  * throttle camera updates
+          .  */
+          .  int DMXVNCServer::TimeToTakePicture() {
+          .  	static struct timeval now = { 0, 0 }, then = { 0, 0 };
+          .  	double elapsed, dnow, dthen;
+          .  
+          1  	gettimeofday(&now, NULL);
+          .  
+      2,821  	dnow = now.tv_sec + (now.tv_usec / 1000000.0);
+      2,820  	dthen = then.tv_sec + (then.tv_usec / 1000000.0);
+        470  	elapsed = dnow - dthen;
+          .  
+      2,350  	if (elapsed > PICTURE_TIMEOUT)
+        942  		memcpy((char *)&then, (char *)&now, sizeof(struct timeval));
+          .  	return elapsed > PICTURE_TIMEOUT;
+          .  };
+          .  
+          .  double getTime() {
+          .  	static struct timeval now = { 0, 0 };
+          .  	gettimeofday(&now, NULL);
+          .  	return now.tv_sec + (now.tv_usec / 1000000.0);
+          .  };
+          .  
+          .  /*
+          .  * simulate grabbing a picture from some device
+          .  */
+    905,220  int DMXVNCServer::TakePicture(unsigned char *buffer)
+      2,820  {
+         56  => /eglibc-2.13/gmon/../ports/sysdeps/arm/eabi/arm-mcount.S:__gnu_mcount_nc (1x)
+          .  	static int last_line = 0, fps = 0, fcount = 0;
+          .  	int line = 0;
+          .  	struct timeval now;
+          .  
+          .  	DISPMANX_TRANSFORM_T	transform = (DISPMANX_TRANSFORM_T)0;
+          .  	VC_RECT_T			rect;
+          .  
+      1,880  	if (safeMode)
+          .  	{
+          .  		DISPMANX_MODEINFO_T info;
+      3,290  		m_display.GetInfo(info);
+  1,439,743  => /home/pi/dispmanx_vnc/DMXDisplay.cpp:DMXDisplay::GetInfo(DISPMANX_MODEINFO_T&) (1x)
+      3,760  		if (info.width != this->info.width || info.height != this->info.height)
+          .  			throw Exception("New mode detected");
+          .  	}
+          .  
+      2,350  	m_display.Snapshot(m_resource, transform);
+707,231,274  => /home/pi/dispmanx_vnc/DMXDisplay.cpp:DMXDisplay::Snapshot(DMXResource&, DISPMANX_TRANSFORM_T) (470x)
+          .  
+      3,290  	vc_dispmanx_rect_set(&rect, 0, 0, info.width, info.height);
+      1,538  => /eglibc-2.13/elf/../ports/sysdeps/arm/dl-trampoline.S:_dl_runtime_resolve (1x)
+706,895,343  => /home/pi/dispmanx_vnc/DMXResource.cpp:DMXResource::ReadData(tag_VC_RECT_T&, void*, int) (470x)
+      1,880  => ???:vc_dispmanx_rect_set (470x)
+          .  	m_resource.ReadData(rect, image, pitch);
+          .  
+        940  	unsigned long *image_lp = (unsigned long *)image;
+          .  	unsigned long *buffer_lp = (unsigned long *)buffer;
+        940  	unsigned long *back_image_lp = (unsigned long*)back_image;
+          .  
+        940  	int lp_padding = padded_width >> 1;
+          .  
+      1,410  	if (bandwidthMode){
+        940  		r_y0 = info.height;
+        940  		r_y1 = -1;
+      2,350  		r_x0 = info.width / 2;
+        470  		r_x1 = -1;
+          .  
+  1,129,410  		for (int y = 0; y < info.height; y++) {
+362,990,400  			for (int x = 0; x < (info.width / 2); x++) {
+288,768,000  				if (back_image_lp[y * lp_padding + x] != image_lp[y * lp_padding + x]) {
+          .  
+  3,899,392  					if (r_y0 == info.height) {
+        762  						r_y0 = r_y1 = y;
+      1,905  						r_x0 = r_x1 = x;
+          .  					}
+          .  					else {
+  5,847,945  						if (y > r_y1) r_y1 = y;
+  5,847,945  						if (x < r_x0) r_x0 = x;
+  7,797,260  						if (x > r_x1) r_x1 = x;
+          .  					}
+          .  
+          .  					unsigned long tbi = image_lp[y * lp_padding + x];
+          .  					buffer_lp[y * lp_padding + x] =
+          .  						((tbi & 0b11111) << 10) |
+          .  						((tbi & 0b11111000000) >> 1) |
+          .  						((tbi & 0x0000ffff) >> 11) |
+          .  						((tbi & 0b111110000000000000000) << 10) |
+          .  						((tbi & 0b111110000000000000000000000) >> 1) |
+ 27,295,744  						((tbi & 0b11111000000000000000000000000000) >> 11);
+          .  				}
+          .  			}
+          .  		}
+          .  
+        940  		if (r_y0 == info.height){
+        890  			r_x0 = r_x1 = r_y0 = r_y1 = 0;
+          .  		}
+          .  		else{
+      3,048  			r_x1 = (r_x1 + 1) * 2;
+      1,524  			r_y1++;
+          .  		}
+          .  
+          .  	}
+          .  	else {
+          .  
+          .  		r_y0 = info.height - 1;
+          .  		r_y1 = 0;
+          .  		r_x0 = info.width - 1;
+          .  		r_x1 = 0;
+          .  
+    451,200  		for (int i = 0; i < info.height - 1; i++) {
+          .  			if (!std::equal(back_image_lp + i * lp_padding, back_image_lp + i * lp_padding + lp_padding - 1, image_lp + i * lp_padding)) {
+          .  				r_y0 = i;
+          .  				break;
+          .  			}
+          .  		}
+          .  
+          .  		for (int i = info.height - 1; i >= r_y0; i--) {
+          .  			if (!std::equal(back_image_lp + i * lp_padding, back_image_lp + i * lp_padding + lp_padding - 1, image_lp + i * lp_padding)) {
+-- line 290 ----------------------------------------
+-- line 310 ----------------------------------------
+          .  		}
+          .  		else {
+          .  			r_x0 = r_x1 = r_y0 = r_y1 = 0;
+          .  		}
+          .  	}
+          .  
+          .  	std::swap(back_image, image);
+          .  
+      1,410  	gettimeofday(&now, NULL);
+  1,697,038  => /eglibc-2.13/time/../sysdeps/unix/syscall-template.S:gettimeofday'2 (470x)
+      1,880  	line = now.tv_usec / (1000000 / info.height);
+      6,943  => /eglibc-2.13/elf/../ports/sysdeps/arm/dl-trampoline.S:_dl_runtime_resolve (2x)
+  1,183,524  => /eglibc-2.13/stdio-common/sprintf.c:sprintf (470x)
+    106,582  => /eglibc-2.13/string/strcmp.c:strcmp (470x)
+     48,755  => ???:__divsi3 (940x)
+    346,534  => /eglibc-2.13/stdio-common/fprintf.c:fprintf (293x)
+          .  	if (line>info.height) line = info.height - 1;
+          .  	//memset(&buffer[(info.width * BPP) * line], 0, (info.width * BPP));
+          .  	/* frames per second (informational only) */
+          .  	fcount++;
+          .  	if (last_line > line) {
+          .  		fps = fcount;
+          .  		fcount = 0;
+          .  	}
+-- line 327 ----------------------------------------
+-- line 330 ----------------------------------------
+          .  	static char printbufferold[80] = "";
+          .  	char printbuffer[80];
+          .  
+          .  	sprintf(printbuffer, "Picture (%03d fps) x0=%d, y0=%d, x1=%d, y1=%d              \r",
+          .  		fps, r_x0, r_y0, r_x1, r_y1);
+          .  
+          .  	if (strcmp(printbuffer, printbufferold)) {
+          .  		fprintf(stderr, printbuffer);
+        879  		strcpy(printbufferold, printbuffer);
+      3,632  => /eglibc-2.13/elf/../ports/sysdeps/arm/dl-trampoline.S:_dl_runtime_resolve (1x)
+     71,947  => /eglibc-2.13/string/strcpy.c:strcpy (293x)
+          .  	}
+          .  
+          .  	/* success!   We have a new picture! */
+          .  	return (r_y0 != r_y1);
+          .  }
+          .  
+          .  int DMXVNCServer::keysym2scancode(rfbKeySym key)
+         76  {
+      2,020  => /eglibc-2.13/gmon/../ports/sysdeps/arm/eabi/arm-mcount.S:__gnu_mcount_nc (38x)
+          .  	//printf("keysym: %04X\n", key);
+          .  
+          .  	int scancode = 0;
+          .  
+          .  	int code = (int)key;
+        114  	if (code >= '0' && code <= '9') {
+          2  		scancode = (code & 0xF) - 1;
+          4  		if (scancode<0) scancode += 10;
+          4  		scancode += KEY_1;
+          .  	}
+        144  	else if (code >= 0xFF50 && code <= 0xFF58) {
+          .  		static const uint16_t map[] =
+          .  		{ KEY_HOME, KEY_LEFT, KEY_UP, KEY_RIGHT, KEY_DOWN,
+          .  		KEY_PAGEUP, KEY_PAGEDOWN, KEY_END, 0 };
+          .  		scancode = map[code & 0xF];
+          .  	}
+        108  	else if (code >= 0xFFE1 && code <= 0xFFEE) {
+          .  		static const uint16_t map[] =
+          .  		{ KEY_LEFTSHIFT, KEY_LEFTSHIFT,
+          .  		KEY_LEFTCTRL, KEY_LEFTCTRL,
+          .  		KEY_LEFTSHIFT, KEY_LEFTSHIFT,
+          .  		0, 0,
+          .  		KEY_LEFTALT, KEY_RIGHTALT,
+          .  		0, 0, 0, 0 };
+         10  		scancode = map[code & 0xF];
+          .  	}
+        136  	else if ((code >= 'A' && code <= 'Z') || (code >= 'a' && code <= 'z')) {
+          .  		static const uint16_t map[] = {
+          .  			KEY_A, KEY_B, KEY_C, KEY_D, KEY_E,
+          .  			KEY_F, KEY_G, KEY_H, KEY_I, KEY_J,
+          .  			KEY_K, KEY_L, KEY_M, KEY_N, KEY_O,
+          .  			KEY_P, KEY_Q, KEY_R, KEY_S, KEY_T,
+          .  			KEY_U, KEY_V, KEY_W, KEY_X, KEY_Y, KEY_Z };
+         90  		scancode = map[(code & 0x5F) - 'A'];
+          .  	}
+          .  	else {
+        290  		switch (code) {
+          2  		case XK_space:    scancode = KEY_SPACE;       break;
+          .  
+          .  		case XK_exclam: scancode = KEY_1; break;
+          .  		case XK_at:     scancode = KEY_2; break;
+          .  		case XK_numbersign:    scancode = KEY_3; break;
+          .  		case XK_dollar:    scancode = KEY_4; break;
+          .  		case XK_percent:    scancode = KEY_5; break;
+          .  		case XK_asciicircum:    scancode = KEY_6; break;
+          4  		case XK_ampersand:    scancode = KEY_7; break;
+          .  		case XK_asterisk:    scancode = KEY_8; break;
+          .  		case XK_parenleft:    scancode = KEY_9; break;
+          .  		case XK_parenright:    scancode = KEY_0; break;
+          .  		case XK_minus:    scancode = KEY_MINUS; break;
+          .  		case XK_underscore:    scancode = KEY_MINUS; break;
+          .  		case XK_equal:    scancode = KEY_EQUAL; break;
+          .  		case XK_plus:    scancode = KEY_EQUAL; break;
+          .  		case XK_BackSpace:    scancode = KEY_BACKSPACE; break;
+          8  		case XK_Tab:    scancode = KEY_TAB; break;
+          .  
+          .  		case XK_braceleft:    scancode = KEY_LEFTBRACE;     break;
+          .  		case XK_braceright:    scancode = KEY_RIGHTBRACE;     break;
+          .  		case XK_bracketleft:    scancode = KEY_LEFTBRACE;     break;
+          .  		case XK_bracketright:    scancode = KEY_RIGHTBRACE;     break;
+         12  		case XK_Return:    scancode = KEY_ENTER;     break;
+          .  
+          .  		case XK_semicolon:    scancode = KEY_SEMICOLON;     break;
+          .  		case XK_colon:    scancode = KEY_SEMICOLON;     break;
+          .  		case XK_apostrophe:    scancode = KEY_APOSTROPHE;     break;
+          .  		case XK_quotedbl:    scancode = KEY_APOSTROPHE;     break;
+          .  		case XK_grave:    scancode = KEY_GRAVE;     break;
+          .  		case XK_asciitilde:    scancode = KEY_GRAVE;     break;
+          .  		case XK_backslash:    scancode = KEY_BACKSLASH;     break;
+          .  		case XK_bar:    scancode = KEY_BACKSLASH;     break;
+          .  
+          .  		case XK_comma:    scancode = KEY_COMMA;      break;
+          .  		case XK_less:    scancode = KEY_COMMA;      break;
+          .  		case XK_period:    scancode = KEY_DOT;      break;
+          4  		case XK_greater:    scancode = KEY_DOT;      break;
+          .  		case XK_slash:    scancode = KEY_SLASH;      break;
+          .  		case XK_question:    scancode = KEY_SLASH;      break;
+          .  		case XK_Caps_Lock:    scancode = KEY_CAPSLOCK;      break;
+          .  
+          .  		case XK_F1:    scancode = KEY_F1; break;
+          .  		case XK_F2:    scancode = KEY_F2; break;
+          .  		case XK_F3:    scancode = KEY_F3; break;
+          .  		case XK_F4:    scancode = KEY_F4; break;
+-- line 429 ----------------------------------------
+-- line 443 ----------------------------------------
+          .  		case XK_Escape:    scancode = KEY_ESC; break;
+          .  
+          .  
+          .  		case 0x0003:    scancode = KEY_CENTER;      break;
+          .  		}
+          .  	}
+          .  
+          .  	return scancode;
+          2  }
+          .  
+          .  void DMXVNCServer::doptr(int buttonMask, int x, int y, rfbClientPtr cl)
+        168  {
+        986  => /eglibc-2.13/gmon/../ports/sysdeps/arm/eabi/arm-mcount.S:__gnu_mcount_nc (28x)
+        224  	((DMXVNCServer *)(cl->screen->screenData))->DoPtr(buttonMask, x, y, cl);
+     16,492  => DMXVNCServer.cpp:DMXVNCServer::DoPtr(int, int, int, _rfbClientRec*) (28x)
+         56  }
+          .  
+          .  void DMXVNCServer::DoPtr(int buttonMask, int x, int y, rfbClientPtr cl)
+        196  {
+      1,493  => /eglibc-2.13/gmon/../ports/sysdeps/arm/eabi/arm-mcount.S:__gnu_mcount_nc (28x)
+          .  	//printf("mouse: 0x%x at %d,%d\n", buttonMask, x,y);
+          .  
+         84  	if (relativeMode) {
+          .  		m_ufile.WriteEvent(EV_REL, REL_X, x - last_x);
+          .  	}
+          .  	else {
+        196  		m_ufile.WriteEvent(EV_ABS, ABS_X, x);
+     14,495  => /home/pi/dispmanx_vnc/UFile.cpp:UFile::WriteEvent(unsigned short, unsigned short, int) (28x)
+          .  	}
+          .  
+         56  	if (relativeMode) {
+        140  		m_ufile.WriteEvent(EV_REL, REL_Y, y - last_y);
+          .  	}
+          .  	else {
+        140  		m_ufile.WriteEvent(EV_ABS, ABS_Y, y);
+      9,748  => /home/pi/dispmanx_vnc/UFile.cpp:UFile::WriteEvent(unsigned short, unsigned short, int)'2 (28x)
+          .  	}
+          .  
+         28  	last_x = x;
+         28  	last_y = y;
+          .  
+        140  	m_ufile.WriteEvent(EV_SYN, SYN_REPORT, 0);
+      5,157  => /home/pi/dispmanx_vnc/UFile.cpp:UFile::WriteEvent(unsigned short, unsigned short, int)'2 (28x)
+         84  	if (mouse_last != buttonMask) {
+        678  => DMXVNCServer.cpp:DMXVNCServer::DoPtr(int, int, int, _rfbClientRec*)'2 (2x)
+          2  		int left_l = mouse_last & 0x1;
+          2  		int left_w = buttonMask & 0x1;
+          .  
+          4  		if (left_l != left_w) {
+          8  			m_ufile.WriteEvent(EV_KEY, BTN_LEFT, left_w);
+        662  => /home/pi/dispmanx_vnc/UFile.cpp:UFile::WriteEvent(unsigned short, unsigned short, int)'2 (2x)
+         12  			m_ufile.WriteEvent(EV_SYN, SYN_REPORT, 0);
+        337  => /home/pi/dispmanx_vnc/UFile.cpp:UFile::WriteEvent(unsigned short, unsigned short, int)'2 (2x)
+          .  		}
+          .  
+          2  		int middle_l = mouse_last & 0x2;
+          2  		int middle_w = buttonMask & 0x2;
+          .  
+          4  		if (middle_l != middle_w) {
+          .  			m_ufile.WriteEvent(EV_KEY, BTN_MIDDLE, middle_w >> 1);
+          .  			m_ufile.WriteEvent(EV_SYN, SYN_REPORT, 0);
+          .  		}
+          2  		int right_l = mouse_last & 0x4;
+          2  		int right_w = buttonMask & 0x4;
+          .  
+          4  		if (right_l != right_w) {
+          .  			m_ufile.WriteEvent(EV_KEY, BTN_RIGHT, right_w >> 2);
+          .  			m_ufile.WriteEvent(EV_SYN, SYN_REPORT, 0);
+          .  		}
+          .  
+          4  		mouse_last = buttonMask;
+          .  	}
+          .  }
+          .  
+          .  void DMXVNCServer::dokey(rfbBool down, rfbKeySym key, rfbClientPtr cl)
+        114  {
+      1,348  => /eglibc-2.13/gmon/../ports/sysdeps/arm/eabi/arm-mcount.S:__gnu_mcount_nc (38x)
+         76  	((DMXVNCServer *)(cl->screen->screenData))->DoKey(down, key, cl);
+         38  }
+          .  
+          .  void DMXVNCServer::DoKey(rfbBool down, rfbKeySym key, rfbClientPtr cl)
+          .  {
+         76  	if (down) {
+        171  		m_ufile.WriteEvent(EV_KEY, keysym2scancode(key), 1);
+      3,093  => /home/pi/dispmanx_vnc/UFile.cpp:UFile::WriteEvent(unsigned short, unsigned short, int) (19x)
+      1,515  => DMXVNCServer.cpp:DMXVNCServer::keysym2scancode(unsigned int) (19x)
+         95  		m_ufile.WriteEvent(EV_SYN, SYN_REPORT, 0);
+          .  	}
+          .  	else {
+        133  		m_ufile.WriteEvent(EV_KEY, keysym2scancode(key), 0);
+      3,087  => /home/pi/dispmanx_vnc/UFile.cpp:UFile::WriteEvent(unsigned short, unsigned short, int) (19x)
+      1,515  => DMXVNCServer.cpp:DMXVNCServer::keysym2scancode(unsigned int) (19x)
+         95  		m_ufile.WriteEvent(EV_SYN, SYN_REPORT, 0);
+          .  	}
+          .  }
+          .  
+          .  enum rfbNewClientAction DMXVNCServer::newclient(rfbClientPtr cl)
+          3  {
+         35  => /eglibc-2.13/gmon/../ports/sysdeps/arm/eabi/arm-mcount.S:__gnu_mcount_nc (1x)
+          2  	return ((DMXVNCServer *)(cl->screen->screenData))->NewClient(cl);
+          2  }
+          .  
+          .  enum rfbNewClientAction DMXVNCServer::NewClient(rfbClientPtr cl)
+          .  {
+          3  	clients++;
+          2  	cl->clientGoneHook = clientgone;
+          .  	return RFB_CLIENT_ACCEPT;
+          .  }
+          .  
+          .  void DMXVNCServer::clientgone(rfbClientPtr cl)
+          .  {
+          .  	((DMXVNCServer *)(cl->screen->screenData))->ClientGone(cl);
+          .  }
+          .  
+          .  void DMXVNCServer::ClientGone(rfbClientPtr cl)
+          .  {
+          .  	clients--;
+          1  }
+
+        521  <counts for unidentified lines in DMXVNCServer.cpp>
+
+--------------------------------------------------------------------------------
+The following files chosen for auto-annotation could not be found:
+--------------------------------------------------------------------------------
+  /eglibc-2.13/string/../ports/sysdeps/arm/memcpy.S
+  /eglibc-2.13/elf/dl-lookup.c
+  /eglibc-2.13/malloc/malloc.c
+  /eglibc-2.13/stdio-common/vfprintf.c
+  /eglibc-2.13/string/../ports/sysdeps/arm/memset.S
+
+--------------------------------------------------------------------------------
+Ir 
+--------------------------------------------------------------------------------
+97  percentage of events annotated
+
